@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -55,12 +56,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(MapboxMap map) {
         mapboxMap = map;
-        mapboxMap.setStyle(Style.MAPBOX_STREETS);
+        mapboxMap.setStyle(Style.EMERALD);
         mapboxMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(0, 0)));
 
         // Show user location (purposely not in follow mode)
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) ||
-                (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && Build.VERSION.SDK_INT >= 23) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSIONS_LOCATION);
         } else {
             mapboxMap.setMyLocationEnabled(true);
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        /*switch (item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.menuItemStreets:
                 mv.setStyle(Style.MAPBOX_STREETS);
                 return true;
@@ -147,8 +148,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-        }*/
-        return true;
+        }
+
     }
 
     private Button changeButtonTypeface(Button button) {
