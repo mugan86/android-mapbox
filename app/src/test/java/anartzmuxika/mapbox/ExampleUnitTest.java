@@ -1,4 +1,4 @@
-package anartzmuxika.mapboxexample;
+package anartzmuxika.mapbox;
 
 import org.junit.Test;
 

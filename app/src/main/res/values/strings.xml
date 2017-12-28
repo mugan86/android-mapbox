@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">MapBoxExample</string>
     <string name="action_settings">Settings</string>
+
+    <string name="satellite">Satellite</string>
+    <string name="streets">Streets</string>
+    <string name="emerald">Emerald</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
 </resources>

@@ -1,4 +1,4 @@
-package anartzmuxika.mapboxexample;
+package anartzmuxika.mapbox;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.constants.Style;
@@ -34,12 +35,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Mapbox.getInstance(this, "pk.eyJ1IjoibXVnYW44NiIsImEiOiJjamJxNHF0emUwZHA0MndyMjVkc2V5eXljIn0.MlRMmNjWSGoVRTXd9FcKFg");
         setContentView(R.layout.activity_main);
-
-        mv = (MapView) findViewById(R.id.mapview);
+        mv = (MapView)findViewById(R.id.mapView);
         mv.onCreate(savedInstanceState);
         mv.getMapAsync(this);
+
+
+
 
         /*Button bugsBut = changeButtonTypeface((Button) findViewById(R.id.bugsButton));
         bugsBut.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(MapboxMap map) {
         mapboxMap = map;
-        mapboxMap.setStyle(Style.EMERALD);
+        mapboxMap.setStyle(Style.SATELLITE);
         mapboxMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(0, 0)));
 
         // Show user location (purposely not in follow mode)
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapboxMap.addMarker(new MarkerOptions().title("Ayacucho").snippet("Peru").position(new LatLng(-13.16658, -74.21608)));
         mapboxMap.addMarker(new MarkerOptions().title("Nairobi").snippet("Kenya").position(new LatLng(-1.26676, 36.83372)));
         mapboxMap.addMarker(new MarkerOptions().title("Canberra").snippet("Australia").position(new LatLng(-35.30952, 149.12430)));
+
+        mapboxMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
     @Override
@@ -132,19 +137,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     {
         switch (item.getItemId()) {
             case R.id.menuItemStreets:
-                mv.setStyle(Style.MAPBOX_STREETS);
+                mapboxMap.setStyle(Style.MAPBOX_STREETS);
                 return true;
             case R.id.menuItemSatellite:
-                mv.setStyle(Style.SATELLITE);
+                mapboxMap.setStyle(Style.SATELLITE);
                 return true;
             case R.id.menuItemEmerald:
-                mv.setStyle(Style.EMERALD);
+                mapboxMap.setStyle(Style.TRAFFIC_NIGHT);
                 return true;
             case R.id.menuItemDark:
-                mv.setStyle(Style.DARK);
+                mapboxMap.setStyle(Style.DARK);
                 return true;
             case R.id.menuItemLight:
-                mv.setStyle(Style.LIGHT);
+                mapboxMap.setStyle(Style.LIGHT);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

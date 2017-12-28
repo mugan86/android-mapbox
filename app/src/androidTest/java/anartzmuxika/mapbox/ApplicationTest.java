@@ -1,4 +1,4 @@
-package anartzmuxika.mapboxexample;
+package anartzmuxika.mapbox;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
